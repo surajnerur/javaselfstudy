@@ -91,9 +91,13 @@ public class StreamsImpl {
 		
 		//double sumOfAllSalary = listPerson.stream().filter(p -> p.getAge() > 55).reduce
 		
-		System.out.println("-----------PRINT ALL---------------");
-		System.out.println("-----------PRINT ALL---------------");
-
+		System.out.println("-----------REDUCE---------------");
+		listPerson.stream().filter(p -> p.getAge() > 50).mapToDouble(Person::getSalary)
+				.reduce((val1, val2) -> val1 > val2 ? val1 : val2).ifPresent(System.out::println);
+		System.out.println("-----------REDUCE WITH IDENTITY---------------");
+		
+		double doubleValue = listPerson.stream().filter(p -> p.getAge() > 55).mapToDouble(Person::getSalary).reduce(23, Double::sum);
+		System.out.println(doubleValue);
 	}
 
 }
